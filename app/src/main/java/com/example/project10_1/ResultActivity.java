@@ -22,6 +22,7 @@ import com.example.project10_1.databinding.ActivityResultBinding;
 
 public class ResultActivity extends AppCompatActivity {
     Button btnReturn;
+    int max;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class ResultActivity extends AppCompatActivity {
         ImageView ivTop = findViewById(R.id.ivTop);
         Integer imageId[] = {R.drawable.pic1, R.drawable.pic2, R.drawable.pic3, R.drawable.pic4, R.drawable.pic5, R.drawable.pic6, R.drawable.pic7, R.drawable.pic8, R.drawable.pic9};
 
-        int max = 0;
+        max = 0;
         for (int i = 0; i < voteResult.length; i++) {
             if (voteResult[max] < voteResult[i]) {
                 max = i;
@@ -67,6 +68,10 @@ public class ResultActivity extends AppCompatActivity {
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent outIntent = new Intent(ResultActivity.this, MainActivity.class);
+                outIntent.putExtra("ImageName",imageName[max]);
+                outIntent.putExtra("ImageID", imageId[max]);
+                setResult(RESULT_OK, outIntent);
                 finish();
             }
         });
